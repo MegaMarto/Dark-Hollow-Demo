@@ -1,0 +1,71 @@
+[gd_scene load_steps=10 format=3 uid="uid://q3mp58fcjj3l"]
+
+[ext_resource type="Script" path="res://WaterOrb.gd" id="1_qbfrx"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_hgytn"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lq5am"]
+blend_mode = 1
+shading_mode = 0
+albedo_color = Color(0.152941, 0.380392, 1, 1)
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_07sp4"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_t4jfc"]
+curve = SubResource("Curve_07sp4")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ga2uf"]
+emission_shape = 2
+emission_sphere_radius = 4.2
+gravity = Vector3(0, -6.13, 0)
+initial_velocity_min = 0.5
+initial_velocity_max = 0.5
+scale_min = 1.15
+scale_max = 2.8
+scale_curve = SubResource("CurveTexture_t4jfc")
+
+[sub_resource type="QuadMesh" id="QuadMesh_wnmhf"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_5g3si"]
+radius = 1.271
+height = 2.552
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_onkj5"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(0.152941, 0.380392, 1, 0.85098)
+disable_receive_shadows = true
+shadow_to_opacity = true
+grow_amount = 0.035
+
+[node name="WaterOrb" type="Node3D"]
+transform = Transform3D(0.127382, 0, 0, 0, 0.127382, 0, 0, 0, 0.127382, 0, 0, 0)
+script = ExtResource("1_qbfrx")
+
+[node name="Area3D" type="Area3D" parent="." groups=["WaterOrb"]]
+transform = Transform3D(3.12, 0, 0, 0, 3.0888, 0, 0, 0, 3.0888, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(2.69, 0, 0, 0, 2.69, 0, 0, 0, 2.69, 0, 0, 0)
+shape = SubResource("SphereShape3D_hgytn")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+transform = Transform3D(0.998212, 0, 0, 0, 0.998212, 0, 0, 0, 0.998212, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_lq5am")
+amount = 60
+lifetime = 4.83
+process_material = SubResource("ParticleProcessMaterial_ga2uf")
+draw_pass_1 = SubResource("QuadMesh_wnmhf")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(3.16034, 0, 0, 0, 3.06942, 0, 0, 0, 3.13829, 0, 0, 0)
+mesh = SubResource("SphereMesh_5g3si")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("StandardMaterial3D_onkj5")

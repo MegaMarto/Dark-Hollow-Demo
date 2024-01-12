@@ -1,0 +1,108 @@
+[gd_scene load_steps=13 format=3 uid="uid://djqy2n4k75ght"]
+
+[ext_resource type="Script" path="res://Spells/Fire/FireExplosion.gd" id="1_hrqjs"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lq5am"]
+blend_mode = 1
+shading_mode = 0
+albedo_color = Color(0.611765, 0.313726, 0, 1)
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_07sp4"]
+_data = [Vector2(0, 0.778947), 0.0, 0.0, 0, 0, Vector2(0.575406, 0.368421), 0.0, 0.0, 0, 0, Vector2(0.972158, 0.147368), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_t4jfc"]
+curve = SubResource("Curve_07sp4")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ga2uf"]
+direction = Vector3(5, 5, 5)
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 6.37
+initial_velocity_max = 6.37
+scale_min = 2.5
+scale_max = 2.8
+scale_curve = SubResource("CurveTexture_t4jfc")
+
+[sub_resource type="QuadMesh" id="QuadMesh_wnmhf"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_5g3si"]
+radius = 1.271
+height = 2.552
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_onkj5"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(0.984314, 0.513726, 0, 0.831373)
+disable_receive_shadows = true
+shadow_to_opacity = true
+grow_amount = 0.035
+
+[sub_resource type="Animation" id="Animation_da5gy"]
+resource_name = "FireExplosion"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:surface_material_override/0:albedo_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.984314, 0.513726, 0, 0.831373), Color(0.984314, 0.513726, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_426bt"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:surface_material_override/0:albedo_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.984314, 0.513726, 0, 0.831373)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xgmu3"]
+_data = {
+"FireExplosion": SubResource("Animation_da5gy"),
+"RESET": SubResource("Animation_426bt")
+}
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_lr8fs"]
+
+[node name="Fire Explosion" type="RigidBody3D"]
+freeze = true
+script = ExtResource("1_hrqjs")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+material_override = SubResource("StandardMaterial3D_lq5am")
+amount = 120
+lifetime = 1.66
+process_material = SubResource("ParticleProcessMaterial_ga2uf")
+draw_pass_1 = SubResource("QuadMesh_wnmhf")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_5g3si")
+skeleton = NodePath("../CollisionShape3D")
+surface_material_override/0 = SubResource("StandardMaterial3D_onkj5")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MeshInstance3D"]
+speed_scale = 0.45
+libraries = {
+"": SubResource("AnimationLibrary_xgmu3")
+}
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(2.685, 0, 0, 0, 2.685, 0, 0, 0, 2.685, 0, 0, 0)
+shape = SubResource("SphereShape3D_lr8fs")

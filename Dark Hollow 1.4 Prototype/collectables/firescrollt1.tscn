@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://cwmh7ysvby4cv"]
+
+[ext_resource type="PackedScene" uid="uid://chnmfxaktlfs4" path="res://textures/firescrollt1.glb" id="1_lgqs3"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xy22n"]
+size = Vector3(0.553978, 0.676151, 2.07135)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1.19698, 0, 0, 0, 0.926286, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("BoxShape3D_xy22n")
+
+[node name="firescrollt1" parent="StaticBody3D" instance=ExtResource("1_lgqs3")]

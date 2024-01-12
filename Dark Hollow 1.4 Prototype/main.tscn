@@ -1,0 +1,1257 @@
+[gd_scene load_steps=18 format=3 uid="uid://by2b3kf708qpe"]
+
+[ext_resource type="Texture2D" uid="uid://cbk1g7oss5fnd" path="res://textures/mudtexture.png" id="2_st5sd"]
+[ext_resource type="PackedScene" uid="uid://d3lf4gyjh7ed8" path="res://web.tscn" id="3_hn3lt"]
+[ext_resource type="PackedScene" uid="uid://bhtpmict388ou" path="res://player.tscn" id="3_mbasg"]
+[ext_resource type="PackedScene" uid="uid://bjwyn53ea5n6b" path="res://spideregg.tscn" id="4_pw74w"]
+[ext_resource type="PackedScene" uid="uid://b1pvg2h20bu1j" path="res://cavespider.tscn" id="5_4mdmu"]
+[ext_resource type="PackedScene" uid="uid://ce68u7a3ukss1" path="res://bigspider.tscn" id="6_gpv6n"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_2lveq"]
+sky_top_color = Color(0, 0.443137, 0.831373, 1)
+sky_horizon_color = Color(0.55, 0.652941, 0.741176, 1)
+ground_bottom_color = Color(0.2, 0.168627, 0.133333, 1)
+ground_horizon_color = Color(0.55, 0.652941, 0.741176, 1)
+
+[sub_resource type="Sky" id="Sky_7ysxj"]
+sky_material = SubResource("ProceduralSkyMaterial_2lveq")
+
+[sub_resource type="Environment" id="Environment_l3q7o"]
+background_mode = 2
+sky = SubResource("Sky_7ysxj")
+ambient_light_color = Color(0.658824, 0.658824, 0.658824, 1)
+ambient_light_sky_contribution = 0.0
+tonemap_mode = 2
+glow_enabled = true
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.0285
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_2kfg1"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_qcwv6"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xpal0"]
+albedo_texture = ExtResource("2_st5sd")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_evupr"]
+size = Vector3(1.55126, 1, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_abqgf"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_02mtj"]
+albedo_texture = ExtResource("2_st5sd")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_k1r6x"]
+size = Vector3(1.54627, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_66ej5"]
+albedo_color = Color(0, 0, 0, 1)
+
+[node name="Node3D" type="Node3D"]
+transform = Transform3D(0.996737, 0, 0, 0, 0.996737, 0, 0, 0, 0.996737, -0.0599937, 0.267288, 0.0278473)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_l3q7o")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+visible = false
+light_color = Color(1, 1, 0.709804, 1)
+shadow_enabled = true
+
+[node name="player" parent="." instance=ExtResource("3_mbasg")]
+transform = Transform3D(0.999997, 0, 0, 0, 0.999997, 0, 0, 0, 0.999997, -16.9435, 8.56585, -3.86822)
+
+[node name="Environment (Mud Caves)" type="Node3D" parent="."]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Environment (Mud Caves)"]
+transform = Transform3D(113.19, 0, 0, 0, 254.469, 0, 0, 0, 96.5249, 0, -126.406, 0)
+physics_material_override = SubResource("PhysicsMaterial_2kfg1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment (Mud Caves)/StaticBody3D"]
+transform = Transform3D(1.66757, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("BoxMesh_qcwv6")
+surface_material_override/0 = SubResource("StandardMaterial3D_xpal0")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D"]
+transform = Transform3D(1.07637, 0, 0, 0, 0.998554, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("BoxShape3D_evupr")
+
+[node name="Area3D" type="Area3D" parent="Environment (Mud Caves)/StaticBody3D" groups=["PlayerTarget"]]
+transform = Transform3D(1.67913, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D/Area3D"]
+shape = SubResource("BoxShape3D_abqgf")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="Environment (Mud Caves)"]
+transform = Transform3D(276.774, 0, 0, 0, 6.4174, 0, 0, 0, 106.294, 90.4422, 20.0983, -3.14072)
+physics_material_override = SubResource("PhysicsMaterial_2kfg1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment (Mud Caves)/StaticBody3D2"]
+transform = Transform3D(1.66757, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("BoxMesh_qcwv6")
+surface_material_override/0 = SubResource("StandardMaterial3D_xpal0")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D2"]
+transform = Transform3D(1.07637, 0, 0, 0, 0.998554, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("BoxShape3D_evupr")
+
+[node name="Area3D" type="Area3D" parent="Environment (Mud Caves)/StaticBody3D2" groups=["PlayerTarget"]]
+transform = Transform3D(1.67913, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D2/Area3D"]
+shape = SubResource("BoxShape3D_abqgf")
+
+[node name="StaticBody3D5" type="StaticBody3D" parent="Environment (Mud Caves)"]
+transform = Transform3D(176.087, 0, 0, 0, 6.41739, 0, 0, 0, 605.526, 177.403, 33.545, -334.763)
+physics_material_override = SubResource("PhysicsMaterial_2kfg1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment (Mud Caves)/StaticBody3D5"]
+transform = Transform3D(1.66757, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("BoxMesh_qcwv6")
+surface_material_override/0 = SubResource("StandardMaterial3D_xpal0")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D5"]
+transform = Transform3D(1.07637, 0, 0, 0, 0.998554, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("BoxShape3D_evupr")
+
+[node name="Area3D" type="Area3D" parent="Environment (Mud Caves)/StaticBody3D5" groups=["PlayerTarget"]]
+transform = Transform3D(1.67913, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D5/Area3D"]
+shape = SubResource("BoxShape3D_abqgf")
+
+[node name="StaticBody3D15" type="StaticBody3D" parent="Environment (Mud Caves)"]
+transform = Transform3D(113.19, 0, 0, 0, 254.468, 0, 0, 0, 185.329, 316.017, -127.091, -28.9094)
+physics_material_override = SubResource("PhysicsMaterial_2kfg1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment (Mud Caves)/StaticBody3D15"]
+transform = Transform3D(0.834976, 0, 0, 0, 1, 0, 0, 0, 1, -0.34597, 0, 0)
+mesh = SubResource("BoxMesh_qcwv6")
+surface_material_override/0 = SubResource("StandardMaterial3D_xpal0")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D15"]
+transform = Transform3D(0.586085, 0, 0, 0, 0.997037, 0, 0, 0, 1, -0.310227, 0, 0)
+shape = SubResource("BoxShape3D_evupr")
+
+[node name="Area3D" type="Area3D" parent="Environment (Mud Caves)/StaticBody3D15" groups=["PlayerTarget"]]
+transform = Transform3D(0.839563, 0, 0, 0, 1, 0, 0, 0, 1, -0.336818, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D15/Area3D"]
+shape = SubResource("BoxShape3D_abqgf")
+
+[node name="StaticBody3D25" type="StaticBody3D" parent="Environment (Mud Caves)"]
+transform = Transform3D(113.19, 0, 0, 0, 254.468, 0, 0, 0, 185.329, 316.016, -118.834, -221.471)
+physics_material_override = SubResource("PhysicsMaterial_2kfg1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment (Mud Caves)/StaticBody3D25"]
+transform = Transform3D(0.834976, 0, 0, 0, 1, 0, 0, 0, 1, -0.34597, 0, 0)
+mesh = SubResource("BoxMesh_qcwv6")
+surface_material_override/0 = SubResource("StandardMaterial3D_xpal0")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D25"]
+transform = Transform3D(0.586085, 0, 0, 0, 0.997037, 0, 0, 0, 1, -0.310227, 0, 0)
+shape = SubResource("BoxShape3D_evupr")
+
+[node name="Area3D" type="Area3D" parent="Environment (Mud Caves)/StaticBody3D25" groups=["PlayerTarget"]]
+transform = Transform3D(0.839563, 0, 0, 0, 1, 0, 0, 0, 1, -0.336818, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D25/Area3D"]
+shape = SubResource("BoxShape3D_abqgf")
+
+[node name="StaticBody3D28" type="StaticBody3D" parent="Environment (Mud Caves)"]
+transform = Transform3D(0.0271618, 0, -262.99, 0, 249.944, 0, 111.166, 0, 0.0642578, 189.708, -118.834, -322.705)
+physics_material_override = SubResource("PhysicsMaterial_2kfg1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment (Mud Caves)/StaticBody3D28"]
+transform = Transform3D(0.834976, 0, 0, 0, 1, 0, 0, 0, 1, -0.34597, 0, 0)
+mesh = SubResource("BoxMesh_qcwv6")
+surface_material_override/0 = SubResource("StandardMaterial3D_xpal0")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D28"]
+transform = Transform3D(0.586085, 0, 0, 0, 0.997037, 0, 0, 0, 1, -0.310227, 0, 0)
+shape = SubResource("BoxShape3D_evupr")
+
+[node name="Area3D" type="Area3D" parent="Environment (Mud Caves)/StaticBody3D28" groups=["PlayerTarget"]]
+transform = Transform3D(0.839563, 0, 0, 0, 1, 0, 0, 0, 1, -0.336818, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D28/Area3D"]
+shape = SubResource("BoxShape3D_abqgf")
+
+[node name="StaticBody3D33" type="StaticBody3D" parent="Environment (Mud Caves)"]
+transform = Transform3D(-111.132, 0, 6.48508, -0.247064, 248.926, -23.6957, -2.73009, -22.527, -261.84, -24.3976, -130.91, -451.31)
+physics_material_override = SubResource("PhysicsMaterial_2kfg1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment (Mud Caves)/StaticBody3D33"]
+transform = Transform3D(0.834976, 0, 0, 0, 1, 0, 0, 0, 1, -0.34597, 0, 0)
+mesh = SubResource("BoxMesh_qcwv6")
+surface_material_override/0 = SubResource("StandardMaterial3D_xpal0")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D33"]
+transform = Transform3D(0.586085, 0, 0, 0, 0.997037, 0, 0, 0, 1, -0.310227, 0, 0)
+shape = SubResource("BoxShape3D_evupr")
+
+[node name="Area3D" type="Area3D" parent="Environment (Mud Caves)/StaticBody3D33" groups=["PlayerTarget"]]
+transform = Transform3D(0.839563, 0, 0, 0, 1, 0, 0, 0, 1, -0.336818, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D33/Area3D"]
+shape = SubResource("BoxShape3D_abqgf")
+
+[node name="StaticBody3D3" type="StaticBody3D" parent="Environment (Mud Caves)"]
+transform = Transform3D(165.528, 0, 0, 0, 323.36, 0, 0, 0, 11.3791, 35.652, -123.38, 42.7152)
+physics_material_override = SubResource("PhysicsMaterial_2kfg1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment (Mud Caves)/StaticBody3D3"]
+transform = Transform3D(3.64376, 0, 0, 0, 1, 0, 0, 0, 1, 0.536683, 0, 0)
+mesh = SubResource("BoxMesh_qcwv6")
+surface_material_override/0 = SubResource("StandardMaterial3D_02mtj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D3"]
+transform = Transform3D(2.29686, 0, 0, 0, 1, 0, 0, 0, 1, 0.521251, 0, 0)
+shape = SubResource("BoxShape3D_evupr")
+
+[node name="Area3D" type="Area3D" parent="Environment (Mud Caves)/StaticBody3D3" groups=["PlayerTarget"]]
+transform = Transform3D(1.8, 0, 0, 0, 1, 0, 0, 0, 1, 0.739449, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D3/Area3D"]
+shape = SubResource("BoxShape3D_k1r6x")
+
+[node name="StaticBody3D9" type="StaticBody3D" parent="Environment (Mud Caves)"]
+transform = Transform3D(165.528, 0, 0, 0, 323.36, 0, 0, 0, 11.3791, 35.652, -123.38, -44.3407)
+physics_material_override = SubResource("PhysicsMaterial_2kfg1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment (Mud Caves)/StaticBody3D9"]
+transform = Transform3D(2.16039, 0, 0, 0, 1, 0, 0, 0, 1, 0.373034, 0, 0)
+mesh = SubResource("BoxMesh_qcwv6")
+surface_material_override/0 = SubResource("StandardMaterial3D_02mtj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D9"]
+transform = Transform3D(1.49147, 0, 0, 0, 1, 0, 0, 0, 1, 0.303053, 0, 0)
+shape = SubResource("BoxShape3D_evupr")
+
+[node name="Area3D" type="Area3D" parent="Environment (Mud Caves)/StaticBody3D9" groups=["PlayerTarget"]]
+transform = Transform3D(1.4, 0, 0, 0, 1, 0, 0, 0, 1, 0.363664, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D9/Area3D"]
+shape = SubResource("BoxShape3D_k1r6x")
+
+[node name="StaticBody3D4" type="StaticBody3D" parent="Environment (Mud Caves)"]
+transform = Transform3D(0.355665, 0, -11.3789, 0, 38.6495, 0, 72.5197, 0, 0.0558068, -61.1047, 18.6326, -0.685389)
+physics_material_override = SubResource("PhysicsMaterial_2kfg1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment (Mud Caves)/StaticBody3D4"]
+transform = Transform3D(1.54379, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("BoxMesh_qcwv6")
+surface_material_override/0 = SubResource("StandardMaterial3D_02mtj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D4"]
+transform = Transform3D(0.994312, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("BoxShape3D_evupr")
+
+[node name="Area3D" type="Area3D" parent="Environment (Mud Caves)/StaticBody3D4" groups=["PlayerTarget"]]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D4/Area3D"]
+shape = SubResource("BoxShape3D_k1r6x")
+
+[node name="StaticBody3D18" type="StaticBody3D" parent="Environment (Mud Caves)"]
+transform = Transform3D(0.523887, 0, -11.4707, 0, 38.6495, 0, 106.82, 0, 0.056257, 324.152, 18.6326, -36.2491)
+physics_material_override = SubResource("PhysicsMaterial_2kfg1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment (Mud Caves)/StaticBody3D18"]
+transform = Transform3D(1.54379, 0, -1.16415e-10, 0, 1, 0, 7.45058e-09, 0, 1, -4.99189e-07, 0, 0.000648499)
+mesh = SubResource("BoxMesh_qcwv6")
+surface_material_override/0 = SubResource("StandardMaterial3D_02mtj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D18"]
+transform = Transform3D(0.994312, 0, 0, 0, 1, 0, -1.86265e-09, 0, 1, 0, 0, 0)
+shape = SubResource("BoxShape3D_evupr")
+
+[node name="Area3D" type="Area3D" parent="Environment (Mud Caves)/StaticBody3D18" groups=["PlayerTarget"]]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D18/Area3D"]
+transform = Transform3D(1, 0, 5.82077e-11, 0, 1, 0, -3.72529e-09, 0, 1, 0, 0, 0)
+shape = SubResource("BoxShape3D_k1r6x")
+
+[node name="StaticBody3D21" type="StaticBody3D" parent="Environment (Mud Caves)"]
+transform = Transform3D(0.286662, 0, -11.4452, 0, 38.6494, 0, 58.4502, 0, 0.056132, 235.609, 18.9515, -88.7736)
+physics_material_override = SubResource("PhysicsMaterial_2kfg1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment (Mud Caves)/StaticBody3D21"]
+transform = Transform3D(1.54379, 0, -1.16415e-10, 0, 1, 0, 7.45058e-09, 0, 1, -4.99189e-07, 0, 0.000648499)
+mesh = SubResource("BoxMesh_qcwv6")
+surface_material_override/0 = SubResource("StandardMaterial3D_02mtj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D21"]
+transform = Transform3D(0.994312, 0, 0, 0, 1, 0, -1.86265e-09, 0, 1, 0, 0, 0)
+shape = SubResource("BoxShape3D_evupr")
+
+[node name="Area3D" type="Area3D" parent="Environment (Mud Caves)/StaticBody3D21" groups=["PlayerTarget"]]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D21/Area3D"]
+transform = Transform3D(1, 0, 5.82077e-11, 0, 1, 0, -3.72529e-09, 0, 1, 0, 0, 0)
+shape = SubResource("BoxShape3D_k1r6x")
+
+[node name="StaticBody3D26" type="StaticBody3D" parent="Environment (Mud Caves)"]
+transform = Transform3D(0.63784, 0, -11.514, 0, 38.6494, 0, 130.055, 0, 0.0564692, 235.609, 18.9515, -234.635)
+physics_material_override = SubResource("PhysicsMaterial_2kfg1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment (Mud Caves)/StaticBody3D26"]
+transform = Transform3D(1.54379, 0, -1.16415e-10, 0, 1, 0, 7.45058e-09, 0, 1, -4.99189e-07, 0, 0.000648499)
+mesh = SubResource("BoxMesh_qcwv6")
+surface_material_override/0 = SubResource("StandardMaterial3D_02mtj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D26"]
+transform = Transform3D(0.994312, 0, 0, 0, 1, 0, -1.86265e-09, 0, 1, 0, 0, 0)
+shape = SubResource("BoxShape3D_evupr")
+
+[node name="Area3D" type="Area3D" parent="Environment (Mud Caves)/StaticBody3D26" groups=["PlayerTarget"]]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D26/Area3D"]
+transform = Transform3D(1, 0, 5.82077e-11, 0, 1, 0, -3.72529e-09, 0, 1, 0, 0, 0)
+shape = SubResource("BoxShape3D_k1r6x")
+
+[node name="StaticBody3D27" type="StaticBody3D" parent="Environment (Mud Caves)"]
+transform = Transform3D(0.63784, 0, -11.514, 0, 38.6494, 0, 130.055, 0, 0.0564692, 272.886, 18.9515, -227.137)
+physics_material_override = SubResource("PhysicsMaterial_2kfg1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment (Mud Caves)/StaticBody3D27"]
+transform = Transform3D(1.54379, 0, -1.16415e-10, 0, 1, 0, 7.45058e-09, 0, 1, -4.99189e-07, 0, 0.000648499)
+mesh = SubResource("BoxMesh_qcwv6")
+surface_material_override/0 = SubResource("StandardMaterial3D_02mtj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D27"]
+transform = Transform3D(0.994312, 0, 0, 0, 1, 0, -1.86265e-09, 0, 1, 0, 0, 0)
+shape = SubResource("BoxShape3D_evupr")
+
+[node name="Area3D" type="Area3D" parent="Environment (Mud Caves)/StaticBody3D27" groups=["PlayerTarget"]]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D27/Area3D"]
+transform = Transform3D(1, 0, 5.82077e-11, 0, 1, 0, -3.72529e-09, 0, 1, 0, 0, 0)
+shape = SubResource("BoxShape3D_k1r6x")
+
+[node name="StaticBody3D32" type="StaticBody3D" parent="Environment (Mud Caves)"]
+transform = Transform3D(0.331339, 0, -11.4868, 0, 38.6494, 0, 67.5598, 0, 0.0563361, 323.588, 18.9515, -367.483)
+physics_material_override = SubResource("PhysicsMaterial_2kfg1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment (Mud Caves)/StaticBody3D32"]
+transform = Transform3D(1.54379, 0, -1.16415e-10, 0, 1, 0, 7.45058e-09, 0, 1, -4.99189e-07, 0, 0.000648499)
+mesh = SubResource("BoxMesh_qcwv6")
+surface_material_override/0 = SubResource("StandardMaterial3D_02mtj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D32"]
+transform = Transform3D(0.994312, 0, 0, 0, 1, 0, -1.86265e-09, 0, 1, 0, 0, 0)
+shape = SubResource("BoxShape3D_evupr")
+
+[node name="Area3D" type="Area3D" parent="Environment (Mud Caves)/StaticBody3D32" groups=["PlayerTarget"]]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D32/Area3D"]
+transform = Transform3D(1, 0, 5.82077e-11, 0, 1, 0, -3.72529e-09, 0, 1, 0, 0, 0)
+shape = SubResource("BoxShape3D_k1r6x")
+
+[node name="StaticBody3D34" type="StaticBody3D" parent="Environment (Mud Caves)"]
+transform = Transform3D(0.924153, 0, -11.5827, 0, 242.255, 0, 188.434, 0, 0.0568061, 40.6563, -83.5723, -462.846)
+physics_material_override = SubResource("PhysicsMaterial_2kfg1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment (Mud Caves)/StaticBody3D34"]
+transform = Transform3D(1.52835, 0, -2.32831e-10, 0, 1, 0, 3.72529e-08, 0, 1, -4.76837e-07, 0, 0.000648499)
+mesh = SubResource("BoxMesh_qcwv6")
+surface_material_override/0 = SubResource("StandardMaterial3D_02mtj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D34"]
+transform = Transform3D(0.994312, 0, 0, 0, 1, 0, -1.86265e-09, 0, 1, 0, 0, 0)
+shape = SubResource("BoxShape3D_evupr")
+
+[node name="Area3D" type="Area3D" parent="Environment (Mud Caves)/StaticBody3D34" groups=["PlayerTarget"]]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D34/Area3D"]
+transform = Transform3D(1, 0, 5.82077e-11, 0, 1, 0, -3.72529e-09, 0, 1, 0, 0, 0)
+shape = SubResource("BoxShape3D_k1r6x")
+
+[node name="StaticBody3D35" type="StaticBody3D" parent="Environment (Mud Caves)"]
+transform = Transform3D(0.668726, 0, -11.5683, 0, 222.741, 0, 136.353, 0, 0.0567354, 63.7316, -73.0859, -502.066)
+physics_material_override = SubResource("PhysicsMaterial_2kfg1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment (Mud Caves)/StaticBody3D35"]
+transform = Transform3D(1.54379, 0, -1.16415e-10, 0, 1, 0, 7.45058e-09, 0, 1, -4.99189e-07, 0, 0.000648499)
+mesh = SubResource("BoxMesh_qcwv6")
+surface_material_override/0 = SubResource("StandardMaterial3D_02mtj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D35"]
+transform = Transform3D(0.994312, 0, 0, 0, 1, 0, -1.86265e-09, 0, 1, 0, 0, 0)
+shape = SubResource("BoxShape3D_evupr")
+
+[node name="Area3D" type="Area3D" parent="Environment (Mud Caves)/StaticBody3D35" groups=["PlayerTarget"]]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D35/Area3D"]
+transform = Transform3D(1, 0, 5.82077e-11, 0, 1, 0, -3.72529e-09, 0, 1, 0, 0, 0)
+shape = SubResource("BoxShape3D_k1r6x")
+
+[node name="StaticBody3D6" type="StaticBody3D" parent="Environment (Mud Caves)"]
+transform = Transform3D(0.355665, 0, -11.3789, 0, 38.6495, 0, 72.5197, 0, 0.0558067, 59.182, 18.4884, -42.3624)
+physics_material_override = SubResource("PhysicsMaterial_2kfg1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment (Mud Caves)/StaticBody3D6"]
+transform = Transform3D(0.873495, 0, 0, 0, 1, 0, 0, 0, 0.99787, 0, 0, 0)
+mesh = SubResource("BoxMesh_qcwv6")
+surface_material_override/0 = SubResource("StandardMaterial3D_02mtj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D6"]
+transform = Transform3D(0.56918, 0, 5.82077e-11, 0, 1, 0, 0, 0, 0.997903, 0, 0, 0)
+shape = SubResource("BoxShape3D_evupr")
+
+[node name="Area3D" type="Area3D" parent="Environment (Mud Caves)/StaticBody3D6" groups=["PlayerTarget"]]
+transform = Transform3D(0.570228, 0, 5.82077e-11, 0, 1, 0, 0, 0, 0.997892, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D6/Area3D"]
+shape = SubResource("BoxShape3D_k1r6x")
+
+[node name="StaticBody3D7" type="StaticBody3D" parent="Environment (Mud Caves)"]
+transform = Transform3D(0.355664, 0, -11.3789, 0, 38.6495, 0, 72.5196, 0, 0.0558067, 59.182, 18.4884, 33.8784)
+physics_material_override = SubResource("PhysicsMaterial_2kfg1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment (Mud Caves)/StaticBody3D7"]
+transform = Transform3D(0.873495, 0, 0, 0, 1, 0, 0, 0, 0.99787, 0, 0, 0)
+mesh = SubResource("BoxMesh_qcwv6")
+surface_material_override/0 = SubResource("StandardMaterial3D_02mtj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D7"]
+transform = Transform3D(0.56918, 0, 5.82077e-11, 0, 1, 0, 0, 0, 0.997903, 0, 0, 0)
+shape = SubResource("BoxShape3D_evupr")
+
+[node name="Area3D" type="Area3D" parent="Environment (Mud Caves)/StaticBody3D7" groups=["PlayerTarget"]]
+transform = Transform3D(0.570228, 0, 5.82077e-11, 0, 1, 0, 0, 0, 0.997892, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D7/Area3D"]
+shape = SubResource("BoxShape3D_k1r6x")
+
+[node name="StaticBody3D8" type="StaticBody3D" parent="Environment (Mud Caves)"]
+transform = Transform3D(0.355664, 0, -11.3789, 0, 38.6495, 0, 72.5196, 0, 0.0558067, 59.1819, 35.5718, -3.13729)
+physics_material_override = SubResource("PhysicsMaterial_2kfg1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment (Mud Caves)/StaticBody3D8"]
+transform = Transform3D(0.873495, 0, 0, 0, 1, 0, 0, 0, 0.99787, 0, 0, 0)
+mesh = SubResource("BoxMesh_qcwv6")
+surface_material_override/0 = SubResource("StandardMaterial3D_02mtj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D8"]
+transform = Transform3D(0.56918, 0, 5.82077e-11, 0, 1, 0, 0, 0, 0.997903, 0, 0, 0)
+shape = SubResource("BoxShape3D_evupr")
+
+[node name="Area3D" type="Area3D" parent="Environment (Mud Caves)/StaticBody3D8" groups=["PlayerTarget"]]
+transform = Transform3D(0.570228, 0, 5.82077e-11, 0, 1, 0, 0, 0, 0.997892, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D8/Area3D"]
+shape = SubResource("BoxShape3D_k1r6x")
+
+[node name="StaticBody3D19" type="StaticBody3D" parent="Environment (Mud Caves)"]
+transform = Transform3D(-72.5195, 0, -0.0558061, 0, 38.6494, 0, 0.35566, 0, -11.3789, 321.598, 19.5194, -44.2715)
+physics_material_override = SubResource("PhysicsMaterial_2kfg1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment (Mud Caves)/StaticBody3D19"]
+transform = Transform3D(0.873495, 0, 0, 0, 1, 0, 0, 0, 0.99787, 0, 0, 0)
+mesh = SubResource("BoxMesh_qcwv6")
+surface_material_override/0 = SubResource("StandardMaterial3D_02mtj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D19"]
+transform = Transform3D(0.56918, 0, 5.82077e-11, 0, 1, 0, 0, 0, 0.997903, 0, 0, 0)
+shape = SubResource("BoxShape3D_evupr")
+
+[node name="Area3D" type="Area3D" parent="Environment (Mud Caves)/StaticBody3D19" groups=["PlayerTarget"]]
+transform = Transform3D(0.570228, 0, 5.82077e-11, 0, 1, 0, 0, 0, 0.997892, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D19/Area3D"]
+shape = SubResource("BoxShape3D_k1r6x")
+
+[node name="StaticBody3D22" type="StaticBody3D" parent="Environment (Mud Caves)"]
+transform = Transform3D(-72.5194, 0, -0.0558061, 0, 38.6494, 0, 0.35566, 0, -11.3789, 292.164, 19.5194, -123.088)
+physics_material_override = SubResource("PhysicsMaterial_2kfg1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment (Mud Caves)/StaticBody3D22"]
+transform = Transform3D(0.873495, 0, 0, 0, 1, 0, 0, 0, 0.99787, 0, 0, 0)
+mesh = SubResource("BoxMesh_qcwv6")
+surface_material_override/0 = SubResource("StandardMaterial3D_02mtj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D22"]
+transform = Transform3D(0.56918, 0, 5.82077e-11, 0, 1, 0, 0, 0, 0.997903, 0, 0, 0)
+shape = SubResource("BoxShape3D_evupr")
+
+[node name="Area3D" type="Area3D" parent="Environment (Mud Caves)/StaticBody3D22" groups=["PlayerTarget"]]
+transform = Transform3D(0.570228, 0, 5.82077e-11, 0, 1, 0, 0, 0, 0.997892, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D22/Area3D"]
+shape = SubResource("BoxShape3D_k1r6x")
+
+[node name="StaticBody3D29" type="StaticBody3D" parent="Environment (Mud Caves)"]
+transform = Transform3D(-72.5194, 0, -0.0558061, 0, 38.6494, 0, 0.35566, 0, -11.3789, 298.184, 19.5194, -329.762)
+physics_material_override = SubResource("PhysicsMaterial_2kfg1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment (Mud Caves)/StaticBody3D29"]
+transform = Transform3D(0.873495, 0, 0, 0, 1, 0, 0, 0, 0.99787, 0, 0, 0)
+mesh = SubResource("BoxMesh_qcwv6")
+surface_material_override/0 = SubResource("StandardMaterial3D_02mtj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D29"]
+transform = Transform3D(0.56918, 0, 5.82077e-11, 0, 1, 0, 0, 0, 0.997903, 0, 0, 0)
+shape = SubResource("BoxShape3D_evupr")
+
+[node name="Area3D" type="Area3D" parent="Environment (Mud Caves)/StaticBody3D29" groups=["PlayerTarget"]]
+transform = Transform3D(0.570228, 0, 5.82077e-11, 0, 1, 0, 0, 0, 0.997892, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D29/Area3D"]
+shape = SubResource("BoxShape3D_k1r6x")
+
+[node name="StaticBody3D31" type="StaticBody3D" parent="Environment (Mud Caves)"]
+transform = Transform3D(-227.857, 0, -0.0563418, 0, 38.6494, 0, 1.11749, 0, -11.4881, 137.559, 19.5194, -329.762)
+physics_material_override = SubResource("PhysicsMaterial_2kfg1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment (Mud Caves)/StaticBody3D31"]
+transform = Transform3D(0.873495, 0, 0, 0, 1, 0, 0, 0, 0.99787, 0, 0, 0)
+mesh = SubResource("BoxMesh_qcwv6")
+surface_material_override/0 = SubResource("StandardMaterial3D_02mtj")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Environment (Mud Caves)/StaticBody3D31"]
+transform = Transform3D(1.34937, 0, 2.91038e-11, 0, 1, 0, -7.45058e-09, 0, 1.00054, -0.297426, 0, 6.12959)
+mesh = SubResource("BoxMesh_qcwv6")
+surface_material_override/0 = SubResource("StandardMaterial3D_02mtj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D31"]
+transform = Transform3D(0.56918, 0, 5.82077e-11, 0, 1, 0, 0, 0, 0.997903, 0, 0, 0)
+shape = SubResource("BoxShape3D_evupr")
+
+[node name="Area3D" type="Area3D" parent="Environment (Mud Caves)/StaticBody3D31" groups=["PlayerTarget"]]
+transform = Transform3D(0.570228, 0, 5.82077e-11, 0, 1, 0, 0, 0, 0.997892, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D31/Area3D"]
+shape = SubResource("BoxShape3D_k1r6x")
+
+[node name="StaticBody3D30" type="StaticBody3D" parent="Environment (Mud Caves)"]
+transform = Transform3D(-72.5194, 0, -0.0558061, 0, 38.6494, 0, 0.35566, 0, -11.3789, 252.053, 54.3898, -329.762)
+physics_material_override = SubResource("PhysicsMaterial_2kfg1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment (Mud Caves)/StaticBody3D30"]
+transform = Transform3D(0.873495, 0, 0, 0, 1, 0, 0, 0, 0.99787, 0, 0, 0)
+mesh = SubResource("BoxMesh_qcwv6")
+surface_material_override/0 = SubResource("StandardMaterial3D_02mtj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D30"]
+transform = Transform3D(0.56918, 0, 5.82077e-11, 0, 1, 0, 0, 0, 0.997903, 0, 0, 0)
+shape = SubResource("BoxShape3D_evupr")
+
+[node name="Area3D" type="Area3D" parent="Environment (Mud Caves)/StaticBody3D30" groups=["PlayerTarget"]]
+transform = Transform3D(0.570228, 0, 5.82077e-11, 0, 1, 0, 0, 0, 0.997892, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D30/Area3D"]
+shape = SubResource("BoxShape3D_k1r6x")
+
+[node name="StaticBody3D36" type="StaticBody3D" parent="Environment (Mud Caves)"]
+transform = Transform3D(-72.5192, 0, -0.055806, 0, 243.104, 0, 0.35566, 0, -11.3789, 51.398, -142.252, -590.613)
+physics_material_override = SubResource("PhysicsMaterial_2kfg1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment (Mud Caves)/StaticBody3D36"]
+transform = Transform3D(0.873495, 0, 0, 0, 1, 0, 0, 0, 0.99787, 0, 0, 0)
+mesh = SubResource("BoxMesh_qcwv6")
+surface_material_override/0 = SubResource("StandardMaterial3D_02mtj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D36"]
+transform = Transform3D(0.56918, 0, 5.82077e-11, 0, 1, 0, 0, 0, 0.997903, 0, 0, 0)
+shape = SubResource("BoxShape3D_evupr")
+
+[node name="Area3D" type="Area3D" parent="Environment (Mud Caves)/StaticBody3D36" groups=["PlayerTarget"]]
+transform = Transform3D(0.570228, 0, 5.82077e-11, 0, 1, 0, 0, 0, 0.997892, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D36/Area3D"]
+shape = SubResource("BoxShape3D_k1r6x")
+
+[node name="StaticBody3D38" type="StaticBody3D" parent="Environment (Mud Caves)"]
+transform = Transform3D(-72.5192, 0, -0.055806, 0, 243.104, 0, 0.35566, 0, -11.3788, 3.5436, -83.7313, -600.556)
+physics_material_override = SubResource("PhysicsMaterial_2kfg1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment (Mud Caves)/StaticBody3D38"]
+transform = Transform3D(0.873495, 0, 0, 0, 1, 0, 0, 0, 0.99787, 0, 0, 0)
+mesh = SubResource("BoxMesh_qcwv6")
+surface_material_override/0 = SubResource("StandardMaterial3D_02mtj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D38"]
+transform = Transform3D(0.56918, 0, 5.82077e-11, 0, 1, 0, 0, 0, 0.997903, 0, 0, 0)
+shape = SubResource("BoxShape3D_evupr")
+
+[node name="Area3D" type="Area3D" parent="Environment (Mud Caves)/StaticBody3D38" groups=["PlayerTarget"]]
+transform = Transform3D(0.570228, 0, 5.82077e-11, 0, 1, 0, 0, 0, 0.997892, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D38/Area3D"]
+shape = SubResource("BoxShape3D_k1r6x")
+
+[node name="StaticBody3D41" type="StaticBody3D" parent="Environment (Mud Caves)"]
+transform = Transform3D(-72.7631, 0, -0.0175186, 0, 126.133, 0, 0.356856, 0, -3.57204, 48.2793, -6.18933, -605.989)
+physics_material_override = SubResource("PhysicsMaterial_2kfg1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment (Mud Caves)/StaticBody3D41"]
+transform = Transform3D(0.873495, 0, 0, 0, 1, 0, 0, 0, 0.99787, 0, 0, 0)
+mesh = SubResource("BoxMesh_qcwv6")
+surface_material_override/0 = SubResource("StandardMaterial3D_02mtj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D41"]
+transform = Transform3D(0.56918, 0, 5.82077e-11, 0, 1, 0, 0, 0, 0.997903, 0, 0, 0)
+shape = SubResource("BoxShape3D_evupr")
+
+[node name="Area3D" type="Area3D" parent="Environment (Mud Caves)/StaticBody3D41" groups=["PlayerTarget"]]
+transform = Transform3D(0.570228, 0, 5.82077e-11, 0, 1, 0, 0, 0, 0.997892, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D41/Area3D"]
+shape = SubResource("BoxShape3D_k1r6x")
+
+[node name="StaticBody3D39" type="StaticBody3D" parent="Environment (Mud Caves)"]
+transform = Transform3D(-72.5191, 0, -0.055806, 0, 243.104, 0, 0.35566, 0, -11.3788, 99.2976, -83.7312, -600.556)
+physics_material_override = SubResource("PhysicsMaterial_2kfg1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment (Mud Caves)/StaticBody3D39"]
+transform = Transform3D(0.873495, 0, 0, 0, 1, 0, 0, 0, 0.99787, 0, 0, 0)
+mesh = SubResource("BoxMesh_qcwv6")
+surface_material_override/0 = SubResource("StandardMaterial3D_02mtj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D39"]
+transform = Transform3D(0.56918, 0, 5.82077e-11, 0, 1, 0, 0, 0, 0.997903, 0, 0, 0)
+shape = SubResource("BoxShape3D_evupr")
+
+[node name="Area3D" type="Area3D" parent="Environment (Mud Caves)/StaticBody3D39" groups=["PlayerTarget"]]
+transform = Transform3D(0.570228, 0, 5.82077e-11, 0, 1, 0, 0, 0, 0.997892, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D39/Area3D"]
+shape = SubResource("BoxShape3D_k1r6x")
+
+[node name="StaticBody3D40" type="StaticBody3D" parent="Environment (Mud Caves)"]
+transform = Transform3D(-1.696, 0, 11.476, 0, 243.104, 0, -120.705, 0, -0.161247, 90.986, -83.7311, -654.104)
+physics_material_override = SubResource("PhysicsMaterial_2kfg1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment (Mud Caves)/StaticBody3D40"]
+transform = Transform3D(0.873495, 0, 0, 0, 1, 0, 0, 0, 0.99787, 0, 0, 0)
+mesh = SubResource("BoxMesh_qcwv6")
+surface_material_override/0 = SubResource("StandardMaterial3D_02mtj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D40"]
+transform = Transform3D(0.56918, 0, 5.82077e-11, 0, 1, 0, 0, 0, 0.997903, 0, 0, 0)
+shape = SubResource("BoxShape3D_evupr")
+
+[node name="Area3D" type="Area3D" parent="Environment (Mud Caves)/StaticBody3D40" groups=["PlayerTarget"]]
+transform = Transform3D(0.570228, 0, 5.82077e-11, 0, 1, 0, 0, 0, 0.997892, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D40/Area3D"]
+shape = SubResource("BoxShape3D_k1r6x")
+
+[node name="StaticBody3D43" type="StaticBody3D" parent="Environment (Mud Caves)"]
+transform = Transform3D(-0.619738, 0, 20.546, 0, 243.104, 0, -44.1069, 0, -0.288689, 5.27371, -83.731, -621.069)
+physics_material_override = SubResource("PhysicsMaterial_2kfg1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment (Mud Caves)/StaticBody3D43"]
+transform = Transform3D(0.873495, 0, 0, 0, 1, 0, 0, 0, 0.99787, 0, 0, 0)
+mesh = SubResource("BoxMesh_qcwv6")
+surface_material_override/0 = SubResource("StandardMaterial3D_02mtj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D43"]
+transform = Transform3D(0.56918, 0, 5.82077e-11, 0, 1, 0, 0, 0, 0.997903, 0, 0, 0)
+shape = SubResource("BoxShape3D_evupr")
+
+[node name="Area3D" type="Area3D" parent="Environment (Mud Caves)/StaticBody3D43" groups=["PlayerTarget"]]
+transform = Transform3D(0.570228, 0, 5.82077e-11, 0, 1, 0, 0, 0, 0.997892, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D43/Area3D"]
+shape = SubResource("BoxShape3D_k1r6x")
+
+[node name="StaticBody3D44" type="StaticBody3D" parent="Environment (Mud Caves)"]
+transform = Transform3D(-0.65665, 0, 25.3067, 0, 243.103, 0, -46.7339, 0, -0.35558, 4.02931, -83.7309, -686.202)
+physics_material_override = SubResource("PhysicsMaterial_2kfg1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment (Mud Caves)/StaticBody3D44"]
+transform = Transform3D(0.873495, 0, 0, 0, 1, 0, -3.72529e-09, 0, 0.99787, 0, 0, 0)
+mesh = SubResource("BoxMesh_qcwv6")
+surface_material_override/0 = SubResource("StandardMaterial3D_02mtj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D44"]
+transform = Transform3D(0.56918, 0, 5.82077e-11, 0, 1, 0, 0, 0, 0.997903, 0, 0, 0)
+shape = SubResource("BoxShape3D_evupr")
+
+[node name="Area3D" type="Area3D" parent="Environment (Mud Caves)/StaticBody3D44" groups=["PlayerTarget"]]
+transform = Transform3D(0.570228, 0, 5.82077e-11, 0, 1, 0, 0, 0, 0.997892, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D44/Area3D"]
+shape = SubResource("BoxShape3D_k1r6x")
+
+[node name="StaticBody3D47" type="StaticBody3D" parent="Environment (Mud Caves)"]
+transform = Transform3D(-1.54954, 0, 39.1311, 0, 243.103, 0, -110.281, 0, -0.549825, 6.38421, -83.7309, -753.135)
+physics_material_override = SubResource("PhysicsMaterial_2kfg1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment (Mud Caves)/StaticBody3D47"]
+transform = Transform3D(0.873495, 0, 0, 0, 1, 0, 0, 0, 0.99787, 0, 0, 0)
+mesh = SubResource("BoxMesh_qcwv6")
+surface_material_override/0 = SubResource("StandardMaterial3D_02mtj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D47"]
+transform = Transform3D(0.56918, 0, 5.82077e-11, 0, 1, 0, 0, 0, 0.997903, 0, 0, 0)
+shape = SubResource("BoxShape3D_evupr")
+
+[node name="Area3D" type="Area3D" parent="Environment (Mud Caves)/StaticBody3D47" groups=["PlayerTarget"]]
+transform = Transform3D(0.570228, 0, 5.82077e-11, 0, 1, 0, 0, 0, 0.997892, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D47/Area3D"]
+shape = SubResource("BoxShape3D_k1r6x")
+
+[node name="StaticBody3D51" type="StaticBody3D" parent="Environment (Mud Caves)"]
+transform = Transform3D(-1.54954, 0, 39.1311, 0, 243.103, 0, -110.281, 0, -0.549825, 75.9851, -83.7308, -753.135)
+physics_material_override = SubResource("PhysicsMaterial_2kfg1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment (Mud Caves)/StaticBody3D51"]
+transform = Transform3D(0.873495, 0, 0, 0, 1, 0, 0, 0, 0.99787, 0, 0, 0)
+mesh = SubResource("BoxMesh_qcwv6")
+surface_material_override/0 = SubResource("StandardMaterial3D_02mtj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D51"]
+transform = Transform3D(0.56918, 0, 5.82077e-11, 0, 1, 0, 0, 0, 0.997903, 0, 0, 0)
+shape = SubResource("BoxShape3D_evupr")
+
+[node name="Area3D" type="Area3D" parent="Environment (Mud Caves)/StaticBody3D51" groups=["PlayerTarget"]]
+transform = Transform3D(0.570228, 0, 5.82077e-11, 0, 1, 0, 0, 0, 0.997892, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D51/Area3D"]
+shape = SubResource("BoxShape3D_k1r6x")
+
+[node name="StaticBody3D45" type="StaticBody3D" parent="Environment (Mud Caves)"]
+transform = Transform3D(-0.660867, 0, 17.4028, 0, 243.103, 0, -47.0341, 0, -0.244524, -8.69258, -83.7309, -649.722)
+physics_material_override = SubResource("PhysicsMaterial_2kfg1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment (Mud Caves)/StaticBody3D45"]
+transform = Transform3D(0.873495, 0, -4.65661e-10, 0, 1, 0, 0, 0, 0.99787, 0.00149822, 0, -0.288194)
+mesh = SubResource("BoxMesh_qcwv6")
+surface_material_override/0 = SubResource("StandardMaterial3D_02mtj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D45"]
+transform = Transform3D(0.56918, 0, 5.82077e-11, 0, 1, 0, 0, 0, 0.997903, 0, 0, 0)
+shape = SubResource("BoxShape3D_evupr")
+
+[node name="Area3D" type="Area3D" parent="Environment (Mud Caves)/StaticBody3D45" groups=["PlayerTarget"]]
+transform = Transform3D(0.570228, 0, 5.82077e-11, 0, 1, 0, 0, 0, 0.997892, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D45/Area3D"]
+shape = SubResource("BoxShape3D_k1r6x")
+
+[node name="StaticBody3D46" type="StaticBody3D" parent="Environment (Mud Caves)"]
+transform = Transform3D(-0.660867, 0, 17.4027, 0, 82.6224, 0, -47.034, 0, -0.244523, 7.0223, -4.07054, -649.722)
+physics_material_override = SubResource("PhysicsMaterial_2kfg1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment (Mud Caves)/StaticBody3D46"]
+transform = Transform3D(0.873495, 0, 3.72529e-09, 0, 1, 0, 0, 0, 0.99787, 0, 0, -1.19209e-07)
+mesh = SubResource("BoxMesh_qcwv6")
+surface_material_override/0 = SubResource("StandardMaterial3D_02mtj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D46"]
+transform = Transform3D(0.56918, 0, 5.82077e-11, 0, 1, 0, 0, 0, 0.997903, 0, 0, 0)
+shape = SubResource("BoxShape3D_evupr")
+
+[node name="Area3D" type="Area3D" parent="Environment (Mud Caves)/StaticBody3D46" groups=["PlayerTarget"]]
+transform = Transform3D(0.570228, 0, 5.82077e-11, 0, 1, 0, 0, 0, 0.997892, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D46/Area3D"]
+shape = SubResource("BoxShape3D_k1r6x")
+
+[node name="StaticBody3D42" type="StaticBody3D" parent="Environment (Mud Caves)"]
+transform = Transform3D(-1.67846, 0, 21.4987, 0, 1.71038, 0, -119.457, 0, -0.302075, 4.1268, -83.731, -654.104)
+physics_material_override = SubResource("PhysicsMaterial_2kfg1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment (Mud Caves)/StaticBody3D42"]
+transform = Transform3D(0.873495, 0, 0, 0, 1, 0, 0, 0, 0.99787, 0, 0, 0)
+mesh = SubResource("BoxMesh_qcwv6")
+surface_material_override/0 = SubResource("StandardMaterial3D_02mtj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D42"]
+transform = Transform3D(0.56918, 0, 5.82077e-11, 0, 1, 0, 0, 0, 0.997903, 0, 0, 0)
+shape = SubResource("BoxShape3D_evupr")
+
+[node name="Area3D" type="Area3D" parent="Environment (Mud Caves)/StaticBody3D42" groups=["PlayerTarget"]]
+transform = Transform3D(0.570228, 0, 5.82077e-11, 0, 1, 0, 0, 0, 0.997892, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D42/Area3D"]
+shape = SubResource("BoxShape3D_k1r6x")
+
+[node name="StaticBody3D37" type="StaticBody3D" parent="Environment (Mud Caves)"]
+transform = Transform3D(-90.106, 0, -0.545417, 0, 46.012, 0, 0.441912, 0, -111.21, 51.3979, -107.967, -650.817)
+physics_material_override = SubResource("PhysicsMaterial_2kfg1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment (Mud Caves)/StaticBody3D37"]
+transform = Transform3D(0.873495, 0, 0, 0, 1, 0, 0, 0, 0.99787, 0, 0, 0)
+mesh = SubResource("BoxMesh_qcwv6")
+surface_material_override/0 = SubResource("StandardMaterial3D_02mtj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D37"]
+transform = Transform3D(0.56918, 0, 5.82077e-11, 0, 1, 0, 0, 0, 0.997903, 0, 0, 0)
+shape = SubResource("BoxShape3D_evupr")
+
+[node name="Area3D" type="Area3D" parent="Environment (Mud Caves)/StaticBody3D37" groups=["PlayerTarget"]]
+transform = Transform3D(0.570228, 0, 5.82077e-11, 0, 1, 0, 0, 0, 0.997892, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D37/Area3D"]
+shape = SubResource("BoxShape3D_k1r6x")
+
+[node name="StaticBody3D50" type="StaticBody3D" parent="Environment (Mud Caves)"]
+transform = Transform3D(-90.106, 0, -0.545417, 0, 46.012, 0, 0.441912, 0, -111.21, 51.3979, -107.967, -762.614)
+physics_material_override = SubResource("PhysicsMaterial_2kfg1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment (Mud Caves)/StaticBody3D50"]
+transform = Transform3D(0.873495, 0, 0, 0, 1, 0, 0, 0, 0.99787, 0, 0, 0)
+mesh = SubResource("BoxMesh_qcwv6")
+surface_material_override/0 = SubResource("StandardMaterial3D_02mtj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D50"]
+transform = Transform3D(0.56918, 0, 5.82077e-11, 0, 1, 0, 0, 0, 0.997903, 0, 0, 0)
+shape = SubResource("BoxShape3D_evupr")
+
+[node name="Area3D" type="Area3D" parent="Environment (Mud Caves)/StaticBody3D50" groups=["PlayerTarget"]]
+transform = Transform3D(0.570228, 0, 5.82077e-11, 0, 1, 0, 0, 0, 0.997892, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D50/Area3D"]
+shape = SubResource("BoxShape3D_k1r6x")
+
+[node name="StaticBody3D52" type="StaticBody3D" parent="Environment (Mud Caves)"]
+transform = Transform3D(-90.1059, 0, -0.545417, 0, 87.6611, 0, 0.441912, 0, -111.21, 51.3978, -5.95981, -758.645)
+physics_material_override = SubResource("PhysicsMaterial_2kfg1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment (Mud Caves)/StaticBody3D52"]
+transform = Transform3D(0.873495, 0, 0, 0, 1, 0, 0, 0, 0.99787, 0, 0, 0)
+mesh = SubResource("BoxMesh_qcwv6")
+surface_material_override/0 = SubResource("StandardMaterial3D_02mtj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D52"]
+transform = Transform3D(0.56918, 0, 5.82077e-11, 0, 1, 0, 0, 0, 0.997903, 0, 0, 0)
+shape = SubResource("BoxShape3D_evupr")
+
+[node name="Area3D" type="Area3D" parent="Environment (Mud Caves)/StaticBody3D52" groups=["PlayerTarget"]]
+transform = Transform3D(0.570228, 0, 5.82077e-11, 0, 1, 0, 0, 0, 0.997892, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D52/Area3D"]
+shape = SubResource("BoxShape3D_k1r6x")
+
+[node name="StaticBody3D49" type="StaticBody3D" parent="Environment (Mud Caves)"]
+transform = Transform3D(-90.106, 0, -0.545417, 0, 46.012, 0, 0.441912, 0, -111.21, 51.3979, 14.1765, -661.228)
+physics_material_override = SubResource("PhysicsMaterial_2kfg1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment (Mud Caves)/StaticBody3D49"]
+transform = Transform3D(0.873495, 0, 0, 0, 1, 0, 0, 0, 0.99787, 0, 0, 0)
+mesh = SubResource("BoxMesh_qcwv6")
+surface_material_override/0 = SubResource("StandardMaterial3D_02mtj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D49"]
+transform = Transform3D(0.56918, 0, 5.82077e-11, 0, 1, 0, 0, 0, 0.997903, 0, 0, 0)
+shape = SubResource("BoxShape3D_evupr")
+
+[node name="Area3D" type="Area3D" parent="Environment (Mud Caves)/StaticBody3D49" groups=["PlayerTarget"]]
+transform = Transform3D(0.570228, 0, 5.82077e-11, 0, 1, 0, 0, 0, 0.997892, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D49/Area3D"]
+shape = SubResource("BoxShape3D_k1r6x")
+
+[node name="StaticBody3D48" type="StaticBody3D" parent="Environment (Mud Caves)"]
+transform = Transform3D(-90.106, 0, -0.545417, 0, 46.012, 0, 0.441912, 0, -111.21, 51.3979, -107.967, -650.817)
+physics_material_override = SubResource("PhysicsMaterial_2kfg1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment (Mud Caves)/StaticBody3D48"]
+transform = Transform3D(0.873495, 0, 0, 0, 1, 0, 0, 0, 0.99787, 0, 0, 0)
+mesh = SubResource("BoxMesh_qcwv6")
+surface_material_override/0 = SubResource("StandardMaterial3D_02mtj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D48"]
+transform = Transform3D(0.56918, 0, 5.82077e-11, 0, 1, 0, 0, 0, 0.997903, 0, 0, 0)
+shape = SubResource("BoxShape3D_evupr")
+
+[node name="Area3D" type="Area3D" parent="Environment (Mud Caves)/StaticBody3D48" groups=["PlayerTarget"]]
+transform = Transform3D(0.570228, 0, 5.82077e-11, 0, 1, 0, 0, 0, 0.997892, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D48/Area3D"]
+shape = SubResource("BoxShape3D_k1r6x")
+
+[node name="StaticBody3D23" type="StaticBody3D" parent="Environment (Mud Caves)"]
+transform = Transform3D(-72.5194, 0, -0.0558061, 0, 38.6494, 0, 0.35566, 0, -11.3789, 258.771, 45.8409, -123.088)
+physics_material_override = SubResource("PhysicsMaterial_2kfg1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment (Mud Caves)/StaticBody3D23"]
+transform = Transform3D(0.873495, 0, 0, 0, 1, 0, 0, 0, 0.99787, 0, 0, 0)
+mesh = SubResource("BoxMesh_qcwv6")
+surface_material_override/0 = SubResource("StandardMaterial3D_02mtj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D23"]
+transform = Transform3D(0.56918, 0, 5.82077e-11, 0, 1, 0, 0, 0, 0.997903, 0, 0, 0)
+shape = SubResource("BoxShape3D_evupr")
+
+[node name="Area3D" type="Area3D" parent="Environment (Mud Caves)/StaticBody3D23" groups=["PlayerTarget"]]
+transform = Transform3D(0.570228, 0, 5.82077e-11, 0, 1, 0, 0, 0, 0.997892, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D23/Area3D"]
+shape = SubResource("BoxShape3D_k1r6x")
+
+[node name="StaticBody3D24" type="StaticBody3D" parent="Environment (Mud Caves)"]
+transform = Transform3D(-42.6815, 0, -0.19536, 0, 13.1737, 0, 0.209325, 0, -39.834, 258.77, 0.193602, -113.837)
+physics_material_override = SubResource("PhysicsMaterial_2kfg1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment (Mud Caves)/StaticBody3D24"]
+transform = Transform3D(0.873495, 0, 0, 0, 1, 0, 0, 0, 0.99787, 0, -0.158681, 0)
+mesh = SubResource("BoxMesh_qcwv6")
+surface_material_override/0 = SubResource("StandardMaterial3D_02mtj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D24"]
+transform = Transform3D(0.56918, 0, 0, 0, 1, 0, 0, 0, 0.997903, 0, 0, 0)
+shape = SubResource("BoxShape3D_evupr")
+
+[node name="Area3D" type="Area3D" parent="Environment (Mud Caves)/StaticBody3D24" groups=["PlayerTarget"]]
+transform = Transform3D(0.570228, 0, 5.82077e-11, 0, 1, 0, 0, 0, 0.997892, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D24/Area3D"]
+shape = SubResource("BoxShape3D_k1r6x")
+
+[node name="StaticBody3D53" type="StaticBody3D" parent="Environment (Mud Caves)"]
+transform = Transform3D(-42.6815, 0, -0.19536, 0, 13.1737, 0, 0.209325, 0, -39.834, 258.77, 0.193602, -113.837)
+physics_material_override = SubResource("PhysicsMaterial_2kfg1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment (Mud Caves)/StaticBody3D53"]
+transform = Transform3D(0.873495, 0, 0, 0, 1, 0, 0, 0, 0.99787, 0, -0.158681, 0)
+mesh = SubResource("BoxMesh_qcwv6")
+surface_material_override/0 = SubResource("StandardMaterial3D_02mtj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D53"]
+transform = Transform3D(0.56918, 0, 4.65661e-10, 0, 1, 0, 0, 0, 0.997903, 0, -0.160769, 0)
+shape = SubResource("BoxShape3D_evupr")
+
+[node name="Area3D" type="Area3D" parent="Environment (Mud Caves)/StaticBody3D53" groups=["PlayerTarget"]]
+transform = Transform3D(0.570228, 0, 4.65661e-10, 0, 1, 0, 0, 0, 0.997892, 0, -0.15188, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D53/Area3D"]
+shape = SubResource("BoxShape3D_k1r6x")
+
+[node name="StaticBody3D54" type="StaticBody3D" parent="Environment (Mud Caves)"]
+transform = Transform3D(-42.6815, 0, -0.19536, 0, 13.1737, 0, 0.209325, 0, -39.8339, 258.77, -1.57689, -109.532)
+physics_material_override = SubResource("PhysicsMaterial_2kfg1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment (Mud Caves)/StaticBody3D54"]
+transform = Transform3D(0.873495, 0, 0, 0, 1, 0, 0, 0, 0.99787, 0, -0.158681, 0)
+mesh = SubResource("BoxMesh_qcwv6")
+surface_material_override/0 = SubResource("StandardMaterial3D_02mtj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D54"]
+transform = Transform3D(0.56918, 0, 4.65661e-10, 0, 1, 0, 0, 0, 0.997903, 0, -0.160769, 0)
+shape = SubResource("BoxShape3D_evupr")
+
+[node name="Area3D" type="Area3D" parent="Environment (Mud Caves)/StaticBody3D54" groups=["PlayerTarget"]]
+transform = Transform3D(0.570228, 0, 4.65661e-10, 0, 1, 0, 0, 0, 0.997892, 0, -0.15188, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D54/Area3D"]
+shape = SubResource("BoxShape3D_k1r6x")
+
+[node name="StaticBody3D55" type="StaticBody3D" parent="Environment (Mud Caves)"]
+transform = Transform3D(-42.6815, 0, -0.19536, 0, 13.1737, 0, 0.209325, 0, -39.8339, 263.688, -0.683554, -112.353)
+physics_material_override = SubResource("PhysicsMaterial_2kfg1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment (Mud Caves)/StaticBody3D55"]
+transform = Transform3D(0.873495, 0, 0, 0, 1, 0, 0, 0, 0.99787, 0, -0.158681, 0)
+mesh = SubResource("BoxMesh_qcwv6")
+surface_material_override/0 = SubResource("StandardMaterial3D_02mtj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D55"]
+transform = Transform3D(0.56918, 0, 4.65661e-10, 0, 1, 0, 0, 0, 0.997903, 0, -0.160769, 0)
+shape = SubResource("BoxShape3D_evupr")
+
+[node name="Area3D" type="Area3D" parent="Environment (Mud Caves)/StaticBody3D55" groups=["PlayerTarget"]]
+transform = Transform3D(0.570228, 0, 4.65661e-10, 0, 1, 0, 0, 0, 0.997892, 0, -0.15188, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D55/Area3D"]
+shape = SubResource("BoxShape3D_k1r6x")
+
+[node name="StaticBody3D56" type="StaticBody3D" parent="Environment (Mud Caves)"]
+transform = Transform3D(-42.6814, 0, -0.19536, 0, 13.1737, 0, 0.209325, 0, -39.8339, 246.827, 2.01657, -142.873)
+physics_material_override = SubResource("PhysicsMaterial_2kfg1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment (Mud Caves)/StaticBody3D56"]
+transform = Transform3D(0.873495, 0, 0, 0, 1, 0, 0, 0, 0.99787, 0, -0.158681, 0)
+mesh = SubResource("BoxMesh_qcwv6")
+surface_material_override/0 = SubResource("StandardMaterial3D_02mtj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D56"]
+transform = Transform3D(0.56918, 0, 4.65661e-10, 0, 1, 0, 0, 0, 0.997903, 0, -0.160769, 0)
+shape = SubResource("BoxShape3D_evupr")
+
+[node name="Area3D" type="Area3D" parent="Environment (Mud Caves)/StaticBody3D56" groups=["PlayerTarget"]]
+transform = Transform3D(0.570228, 0, 4.65661e-10, 0, 1, 0, 0, 0, 0.997892, 0, -0.15188, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D56/Area3D"]
+shape = SubResource("BoxShape3D_k1r6x")
+
+[node name="StaticBody3D20" type="StaticBody3D" parent="Environment (Mud Caves)"]
+transform = Transform3D(-72.5201, 0, 0.0244285, 0, 38.6494, 0, -0.155688, 0, -11.379, 282.47, 38.5816, -44.2715)
+physics_material_override = SubResource("PhysicsMaterial_2kfg1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment (Mud Caves)/StaticBody3D20"]
+transform = Transform3D(0.873495, 0, 0, 0, 1, 0, 0, 0, 0.99787, 0, 0, 0)
+mesh = SubResource("BoxMesh_qcwv6")
+surface_material_override/0 = SubResource("StandardMaterial3D_02mtj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D20"]
+transform = Transform3D(0.56918, 0, 5.82077e-11, 0, 1, 0, 0, 0, 0.997903, 0, 0, 0)
+shape = SubResource("BoxShape3D_evupr")
+
+[node name="Area3D" type="Area3D" parent="Environment (Mud Caves)/StaticBody3D20" groups=["PlayerTarget"]]
+transform = Transform3D(0.570228, 0, 5.82077e-11, 0, 1, 0, 0, 0, 0.997892, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D20/Area3D"]
+shape = SubResource("BoxShape3D_k1r6x")
+
+[node name="StaticBody3D10" type="StaticBody3D" parent="Environment (Mud Caves)"]
+transform = Transform3D(0.0711362, 0, -11.3343, 0, 218.864, 0, 14.5046, 0, 0.0555876, 113.358, -108.9, -3.13728)
+physics_material_override = SubResource("PhysicsMaterial_2kfg1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment (Mud Caves)/StaticBody3D10"]
+transform = Transform3D(0.873495, 0, 0, 0, 1, 0, 0, 0, 0.99787, 0, 0, 0)
+mesh = SubResource("BoxMesh_qcwv6")
+surface_material_override/0 = SubResource("StandardMaterial3D_02mtj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D10"]
+transform = Transform3D(0.56918, 0, 5.82077e-11, 0, 1, 0, 0, 0, 0.997903, 0, 0, 0)
+shape = SubResource("BoxShape3D_evupr")
+
+[node name="Area3D" type="Area3D" parent="Environment (Mud Caves)/StaticBody3D10" groups=["PlayerTarget"]]
+transform = Transform3D(0.570228, 0, 5.82077e-11, 0, 1, 0, 0, 0, 0.997892, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D10/Area3D"]
+shape = SubResource("BoxShape3D_k1r6x")
+
+[node name="StaticBody3D11" type="StaticBody3D" parent="Environment (Mud Caves)"]
+transform = Transform3D(0.0711362, 0, -11.3342, 0, 218.863, 0, 14.5046, 0, 0.0555876, 135.515, -108.899, -13.17)
+physics_material_override = SubResource("PhysicsMaterial_2kfg1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment (Mud Caves)/StaticBody3D11"]
+transform = Transform3D(0.873495, 0, 0, 0, 1, 0, 0, 0, 0.99787, 0, 0, 0)
+mesh = SubResource("BoxMesh_qcwv6")
+surface_material_override/0 = SubResource("StandardMaterial3D_02mtj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D11"]
+transform = Transform3D(0.56918, 0, 5.82077e-11, 0, 1, 0, 0, 0, 0.997903, 0, 0, 0)
+shape = SubResource("BoxShape3D_evupr")
+
+[node name="Area3D" type="Area3D" parent="Environment (Mud Caves)/StaticBody3D11" groups=["PlayerTarget"]]
+transform = Transform3D(0.570228, 0, 5.82077e-11, 0, 1, 0, 0, 0, 0.997892, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D11/Area3D"]
+shape = SubResource("BoxShape3D_k1r6x")
+
+[node name="StaticBody3D12" type="StaticBody3D" parent="Environment (Mud Caves)"]
+transform = Transform3D(0.0711362, 0, -11.3342, 0, 218.863, 0, 14.5046, 0, 0.0555876, 149.866, -108.899, 0.842411)
+physics_material_override = SubResource("PhysicsMaterial_2kfg1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment (Mud Caves)/StaticBody3D12"]
+transform = Transform3D(0.873495, 0, 0, 0, 1, 0, 0, 0, 0.99787, 0, 0, 0)
+mesh = SubResource("BoxMesh_qcwv6")
+surface_material_override/0 = SubResource("StandardMaterial3D_02mtj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D12"]
+transform = Transform3D(0.56918, 0, 5.82077e-11, 0, 1, 0, 0, 0, 0.997903, 0, 0, 0)
+shape = SubResource("BoxShape3D_evupr")
+
+[node name="Area3D" type="Area3D" parent="Environment (Mud Caves)/StaticBody3D12" groups=["PlayerTarget"]]
+transform = Transform3D(0.570228, 0, 5.82077e-11, 0, 1, 0, 0, 0, 0.997892, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D12/Area3D"]
+shape = SubResource("BoxShape3D_k1r6x")
+
+[node name="StaticBody3D57" type="StaticBody3D" parent="Environment (Mud Caves)"]
+transform = Transform3D(0.517356, 0, -178.76, 0, 255.387, 0, 105.488, 0, 0.876714, 149.866, -261.413, 0.842409)
+physics_material_override = SubResource("PhysicsMaterial_2kfg1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment (Mud Caves)/StaticBody3D57"]
+transform = Transform3D(0.873495, 0, 0, 0, 1, 0, 2.32831e-10, 0, 0.99787, 0, 0, 0)
+mesh = SubResource("BoxMesh_qcwv6")
+surface_material_override/0 = SubResource("StandardMaterial3D_66ej5")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D57"]
+transform = Transform3D(0.56918, 0, 5.82077e-11, 0, 1, 0, 0, 0, 0.997903, 0, 0, 0)
+shape = SubResource("BoxShape3D_evupr")
+
+[node name="Area3D" type="Area3D" parent="Environment (Mud Caves)/StaticBody3D57" groups=["PlayerTarget", "Void"]]
+transform = Transform3D(0.570228, 0, 5.82077e-11, 0, 1, 0, 0, 0, 0.997892, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D57/Area3D"]
+shape = SubResource("BoxShape3D_k1r6x")
+
+[node name="StaticBody3D13" type="StaticBody3D" parent="Environment (Mud Caves)"]
+transform = Transform3D(0.0711362, 0, -11.3342, 0, 218.863, 0, 14.5046, 0, 0.0555875, 165.667, -108.899, -14.5945)
+physics_material_override = SubResource("PhysicsMaterial_2kfg1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment (Mud Caves)/StaticBody3D13"]
+transform = Transform3D(0.873495, 0, 0, 0, 1, 0, 0, 0, 0.99787, 0, 0, 0)
+mesh = SubResource("BoxMesh_qcwv6")
+surface_material_override/0 = SubResource("StandardMaterial3D_02mtj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D13"]
+transform = Transform3D(0.56918, 0, 5.82077e-11, 0, 1, 0, 0, 0, 0.997903, 0, 0, 0)
+shape = SubResource("BoxShape3D_evupr")
+
+[node name="Area3D" type="Area3D" parent="Environment (Mud Caves)/StaticBody3D13" groups=["PlayerTarget"]]
+transform = Transform3D(0.570228, 0, 5.82077e-11, 0, 1, 0, 0, 0, 0.997892, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D13/Area3D"]
+shape = SubResource("BoxShape3D_k1r6x")
+
+[node name="StaticBody3D14" type="StaticBody3D" parent="Environment (Mud Caves)"]
+transform = Transform3D(0.0711362, 0, -11.3342, 0, 218.863, 0, 14.5046, 0, 0.0555875, 181.871, -108.899, -1.22228)
+physics_material_override = SubResource("PhysicsMaterial_2kfg1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment (Mud Caves)/StaticBody3D14"]
+transform = Transform3D(0.873495, 0, 0, 0, 1, 0, 0, 0, 0.99787, 0, 0, 0)
+mesh = SubResource("BoxMesh_qcwv6")
+surface_material_override/0 = SubResource("StandardMaterial3D_02mtj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D14"]
+transform = Transform3D(0.56918, 0, 5.82077e-11, 0, 1, 0, 0, 0, 0.997903, 0, 0, 0)
+shape = SubResource("BoxShape3D_evupr")
+
+[node name="Area3D" type="Area3D" parent="Environment (Mud Caves)/StaticBody3D14" groups=["PlayerTarget"]]
+transform = Transform3D(0.570228, 0, 5.82077e-11, 0, 1, 0, 0, 0, 0.997892, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D14/Area3D"]
+shape = SubResource("BoxShape3D_k1r6x")
+
+[node name="StaticBody3D16" type="StaticBody3D" parent="Environment (Mud Caves)"]
+transform = Transform3D(0.0711362, 0, -11.3342, 0, 218.863, 0, 14.5046, 0, 0.0555875, 198.68, -108.899, -1.22228)
+physics_material_override = SubResource("PhysicsMaterial_2kfg1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment (Mud Caves)/StaticBody3D16"]
+transform = Transform3D(0.873495, 0, 0, 0, 1, 0, 0, 0, 0.99787, 0, 0, 0)
+mesh = SubResource("BoxMesh_qcwv6")
+surface_material_override/0 = SubResource("StandardMaterial3D_02mtj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D16"]
+transform = Transform3D(0.56918, 0, 5.82077e-11, 0, 1, 0, 0, 0, 0.997903, 0, 0, 0)
+shape = SubResource("BoxShape3D_evupr")
+
+[node name="Area3D" type="Area3D" parent="Environment (Mud Caves)/StaticBody3D16" groups=["PlayerTarget"]]
+transform = Transform3D(0.570228, 0, 5.82077e-11, 0, 1, 0, 0, 0, 0.997892, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D16/Area3D"]
+shape = SubResource("BoxShape3D_k1r6x")
+
+[node name="StaticBody3D17" type="StaticBody3D" parent="Environment (Mud Caves)"]
+transform = Transform3D(0.0711362, 0, -11.3342, 0, 218.863, 0, 14.5046, 0, 0.0555875, 214.758, -108.899, 6.75942)
+physics_material_override = SubResource("PhysicsMaterial_2kfg1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment (Mud Caves)/StaticBody3D17"]
+transform = Transform3D(0.873495, 0, 0, 0, 1, 0, 0, 0, 0.99787, 0, 0, 0)
+mesh = SubResource("BoxMesh_qcwv6")
+surface_material_override/0 = SubResource("StandardMaterial3D_02mtj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D17"]
+transform = Transform3D(0.56918, 0, 5.82077e-11, 0, 1, 0, 0, 0, 0.997903, 0, 0, 0)
+shape = SubResource("BoxShape3D_evupr")
+
+[node name="Area3D" type="Area3D" parent="Environment (Mud Caves)/StaticBody3D17" groups=["PlayerTarget"]]
+transform = Transform3D(0.570228, 0, 5.82077e-11, 0, 1, 0, 0, 0, 0.997892, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment (Mud Caves)/StaticBody3D17/Area3D"]
+shape = SubResource("BoxShape3D_k1r6x")
+
+[node name="Webrootnode" parent="Environment (Mud Caves)" instance=ExtResource("3_hn3lt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 295.639, 0.499482, -100.02)
+
+[node name="Webrootnode2" parent="Environment (Mud Caves)" instance=ExtResource("3_hn3lt")]
+transform = Transform3D(0.999999, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, 264.159, 0.647725, -84.82)
+
+[node name="Webrootnode3" parent="Environment (Mud Caves)" instance=ExtResource("3_hn3lt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 297.934, 0.359178, -75.6188)
+
+[node name="spideregg" parent="Environment (Mud Caves)" instance=ExtResource("4_pw74w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 278.227, 0.928285, -72.8873)
+freeze = true
+
+[node name="spideregg2" parent="Environment (Mud Caves)" instance=ExtResource("4_pw74w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 247.722, 1.77238, -59.7571)
+freeze = true
+
+[node name="spideregg3" parent="Environment (Mud Caves)" instance=ExtResource("4_pw74w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 288.778, 0.780043, -112.403)
+freeze = true
+
+[node name="spideregg4" parent="Environment (Mud Caves)" instance=ExtResource("4_pw74w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 312.762, 0.639738, -63.5138)
+freeze = true
+
+[node name="CaveSpiderRootNode" parent="Environment (Mud Caves)" instance=ExtResource("5_4mdmu")]
+transform = Transform3D(-4.37113e-08, 0, -0.999999, 0, 0.999999, 0, 0.999999, 0, -4.37113e-08, 276.963, 9.76457, -346.156)
+
+[node name="CaveSpiderRootNode2" parent="Environment (Mud Caves)" instance=ExtResource("5_4mdmu")]
+transform = Transform3D(-4.37113e-08, 0, -0.999999, 0, 0.999999, 0, 0.999999, 0, -4.37113e-08, 223.79, 11.7711, -369.232)
+
+[node name="spideregg5" parent="Environment (Mud Caves)" instance=ExtResource("4_pw74w")]
+transform = Transform3D(0.999999, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, 115.437, 7.75802, -346.157)
+freeze = true
+
+[node name="Webrootnode4" parent="Environment (Mud Caves)" instance=ExtResource("3_hn3lt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 293.016, 6.31267, -381.272)
+
+[node name="Webrootnode5" parent="Environment (Mud Caves)" instance=ExtResource("3_hn3lt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 117.698, 6.32922, -348.55)
+
+[node name="Webrootnode6" parent="Environment (Mud Caves)" instance=ExtResource("3_hn3lt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 190.682, 6.24208, -381.272)
+
+[node name="Bigspider" parent="Environment (Mud Caves)" instance=ExtResource("6_gpv6n")]
+transform = Transform3D(-0.0256884, 0, 0.999669, 0, 0.999999, 0, -0.999669, 0, -0.0256884, 7.23355, -74.9281, -654.057)
+
+[node name="Webrootnode7" parent="Environment (Mud Caves)" instance=ExtResource("3_hn3lt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0601901, -82.5366, -652.156)
+
+[node name="Webrootnode8" parent="Environment (Mud Caves)" instance=ExtResource("3_hn3lt")]
+transform = Transform3D(1.144, 0, 0, 0, -5.00058e-08, -1.144, 0, 1.144, -5.00058e-08, 41.1943, -70.4973, -715.362)
+
+[node name="Webrootnode9" parent="Environment (Mud Caves)" instance=ExtResource("3_hn3lt")]
+transform = Transform3D(1.08486, -1.58695e-08, -0.363053, -0.363053, -4.74208e-08, -1.08486, 1.21522e-22, 1.144, -5.00058e-08, 41.1943, -70.4972, -722.048)
+
+[node name="Webrootnode10" parent="Environment (Mud Caves)" instance=ExtResource("3_hn3lt")]
+transform = Transform3D(1.1171, -1.07798e-08, -0.246612, -0.246612, -4.88301e-08, -1.1171, 6.0761e-23, 1.144, -5.00058e-08, 41.1943, -70.4972, -737.249)
+
+[node name="Webrootnode11" parent="Environment (Mud Caves)" instance=ExtResource("3_hn3lt")]
+transform = Transform3D(0.981091, -2.57189e-08, -0.588381, -0.588381, -4.28849e-08, -0.981091, -3.2734e-16, 1.144, -5.00058e-08, 41.1942, -70.4972, -743.935)
+
+[node name="Webrootnode12" parent="Environment (Mud Caves)" instance=ExtResource("3_hn3lt")]
+transform = Transform3D(1.144, 0, 0, 0, -5.00058e-08, -1.144, 0, 1.144, -5.00058e-08, 41.1943, -70.4972, -772.016)
+
+[node name="Webrootnode13" parent="Environment (Mud Caves)" instance=ExtResource("3_hn3lt")]
+transform = Transform3D(1.08486, -1.58695e-08, -0.363053, -0.363053, -4.74208e-08, -1.08486, 1.21522e-22, 1.144, -5.00058e-08, 41.1942, -70.4972, -778.703)
+
+[node name="Webrootnode14" parent="Environment (Mud Caves)" instance=ExtResource("3_hn3lt")]
+transform = Transform3D(1.1171, -1.07798e-08, -0.246612, -0.246612, -4.883e-08, -1.1171, 6.0761e-23, 1.144, -5.00058e-08, 41.1942, -70.4972, -793.903)
+
+[node name="Webrootnode15" parent="Environment (Mud Caves)" instance=ExtResource("3_hn3lt")]
+transform = Transform3D(0.981091, -2.57189e-08, -0.588381, -0.588381, -4.28848e-08, -0.981091, -3.2734e-16, 1.144, -5.00057e-08, 41.1942, -70.4972, -800.589)
+
+[node name="Webrootnode16" parent="Environment (Mud Caves)" instance=ExtResource("3_hn3lt")]
+transform = Transform3D(1, 0, 0, 0, -0.311472, 0.950255, 0, -0.950255, -0.311472, 174.174, 24.1294, -338.404)
+
+[node name="Webrootnode17" parent="Environment (Mud Caves)" instance=ExtResource("3_hn3lt")]
+transform = Transform3D(0.999998, 0, 0, 0, -0.933466, -0.358661, 0, 0.358661, -0.933466, 254.064, 24.9511, -386.806)
+
+[node name="Webrootnode18" parent="Environment (Mud Caves)" instance=ExtResource("3_hn3lt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 264.924, 0.735111, -60.2243)
+
+[node name="Webrootnode19" parent="Environment (Mud Caves)" instance=ExtResource("3_hn3lt")]
+transform = Transform3D(0.999999, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, 279.934, 0.231074, -39.941)
+
+[node name="Webrootnode20" parent="Environment (Mud Caves)" instance=ExtResource("3_hn3lt")]
+transform = Transform3D(0.965925, -0.25, 0.0669873, 0, -0.258819, -0.965925, 0.258819, 0.933012, -0.25, 309.068, 9.76457, -37.149)
+
+[node name="Webrootnode21" parent="Environment (Mud Caves)" instance=ExtResource("3_hn3lt")]
+transform = Transform3D(0.999999, 0, 0, 0, -0.354862, -0.934918, 0, 0.934918, -0.354862, 257.379, 13.444, -35.0948)
+
+[node name="Webrootnode22" parent="Environment (Mud Caves)" instance=ExtResource("3_hn3lt")]
+transform = Transform3D(0.995242, -0.0974265, 0, 0.0974265, 0.995242, 0, 0, 0, 0.999999, 256.526, 9.77688, -187.766)
+
+[node name="Webrootnode23" parent="Environment (Mud Caves)" instance=ExtResource("3_hn3lt")]
+transform = Transform3D(0.991812, 0.127705, 0, -0.127705, 0.991812, 0, 0, 0, 1, 248.914, 9.95519, -286.223)
+
+[node name="Webrootnode24" parent="Environment (Mud Caves)" instance=ExtResource("3_hn3lt")]
+transform = Transform3D(-0.408314, -0.91284, 0, 0.91284, -0.408314, 0, 0, 0, 0.999999, 266.392, 18.5028, -246.776)
+
+[node name="spideregg6" parent="Environment (Mud Caves)" instance=ExtResource("4_pw74w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 257.901, 10.7678, -184.63)
+freeze = true
